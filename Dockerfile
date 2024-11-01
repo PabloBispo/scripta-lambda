@@ -1,4 +1,5 @@
-FROM public.ecr.aws/lambda/python:3.10
+FROM python:3.11-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:0.4.29 /uv /uvx /bin/
 
 # The installer requires curl (and certificates) to download the release archive
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
