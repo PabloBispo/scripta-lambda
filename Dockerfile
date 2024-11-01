@@ -17,13 +17,13 @@ ENV PATH="/root/.cargo/bin/:$PATH"
 
 
 # Copy function code
-ADD . /app
+ADD . /${LAMBDA_TASK_ROOT}
 
-WORKDIR /app
+WORKDIR /${LAMBDA_TASK_ROOT}
 
 RUN uv sync --frozen
 
-ENV PATH="/app/.venv/bin:$PATH"
+ENV PATH="/${LAMBDA_TASK_ROOT}/.venv/bin:$PATH"
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 CMD [ "app.lambda_function.handler" ]
