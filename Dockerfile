@@ -1,11 +1,11 @@
-FROM public.ecr.aws/lambda/python:3.10
+FROM public.ecr.aws/lambda/python:3.11
 
 WORKDIR /app/
 
 # Copy function code
-COPY . /app/
+ADD . /app/
 
-ENV PYTHONPATH=/app/
+ENV PYTHONPATH=/app
 
 RUN pip install -r requirements.txt
 
