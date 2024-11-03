@@ -8,7 +8,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
 
 import app.prompts as p
-from app.cifraclub import chords, lyrics, raw
+from app.cifraclub import chords_, lyrics_, raw_
 
 load_dotenv()
 
@@ -55,9 +55,9 @@ def handler(event, context):
         return {'statusCode': 200, 'music_analysis': response}
 
     if cifraclub_url:
-        music_raw_sheet = raw(cifraclub_url)
-        music_chords = chords(raw=music_raw_sheet)
-        music_lyrics = lyrics(raw=music_raw_sheet)
+        music_raw_sheet = raw_(cifraclub_url)
+        music_chords = chords_(raw=music_raw_sheet['raw'])
+        music_lyrics = lyrics_(raw=music_raw_sheet['raw'])
 
         return {
             'statusCode': 200,

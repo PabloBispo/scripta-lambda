@@ -79,18 +79,18 @@ def get_lyrics(raw: list[str], trim_intro_chords: bool = True):
     return '\n'.join(lyrics).strip()
 
 
-def chords(raw: str = None, url: str = None):
+def chords_(raw: str = None, url: str = None):
     if not raw:
         raw = get_raw(url)
     chords, has_solo = get_chords(raw)
     return {'chords': chords, 'has_solo': has_solo}
 
 
-def raw(url: str):
+def raw_(url: str):
     return {'raw': get_raw(url)}
 
 
-def lyrics(raw: str = None, url: str = None):
+def lyrics_(raw: str = None, url: str = None):
     if not raw:
         raw = get_raw(url)
     return {'lyrics': get_lyrics(raw)}
