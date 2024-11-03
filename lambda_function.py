@@ -7,8 +7,9 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
 
-import app.prompts as p
+
 from app.cifraclub import chords_, lyrics_, raw_
+from app.prompts import REFORMED_MUSIC_INFO_EXTRACTION_PROMPT
 
 load_dotenv()
 
@@ -20,7 +21,7 @@ llm = ChatGroq(model='llama-3.1-70b-versatile', api_key=GROQ_API_KEY)
 
 def base_chain():
     prompt = ChatPromptTemplate.from_template(
-        p.REFORMED_MUSIC_INFO_EXTRACTION_PROMPT
+        REFORMED_MUSIC_INFO_EXTRACTION_PROMPT
     )
 
     chain = (
@@ -67,3 +68,11 @@ def handler(event, context):
                 **music_lyrics,
             },
         }
+
+
+if __name__ == '__main__':
+    event = {
+  "cifraclub_url": "https://www.cifraclub.com.br/isaias-saad/bondade-de-deus/"
+}
+    response = handler(event, None)
+    print(response)
