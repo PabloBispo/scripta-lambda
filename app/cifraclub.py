@@ -53,7 +53,7 @@ def get_chords(raw: str):
         elif any(is_chord(x) for x in line):
             chords.extend([x for x in line if is_chord(x)])
 
-    return set(chords), has_solo
+    return list(set(chords)), has_solo
 
 
 def get_lyrics(raw: list[str], trim_intro_chords: bool = True):

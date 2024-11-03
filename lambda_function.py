@@ -62,11 +62,11 @@ def handler(event, context):
 
         return {
             'statusCode': 200,
-            'music_sheets': {
+            'music_sheets': dict(
                 **music_raw_sheet,
                 **music_chords,
                 **music_lyrics,
-            },
+            ),
         }
 
 
