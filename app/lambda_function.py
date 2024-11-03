@@ -2,19 +2,12 @@ import json
 import os
 
 from dotenv import load_dotenv
-from langchain_community.retrievers import WikipediaRetriever
-from langchain_core.documents import Document
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
 
-
-def format_docs(docs: list[Document]) -> str:
-    f_docs = "\n\n".join(doc.page_content for doc in docs)
-    print(f_docs)
-    return f_docs
-
+import app.prompts as p
 
 load_dotenv()
 
@@ -26,23 +19,14 @@ llm = ChatGroq(model="llama-3.1-70b-versatile", api_key=GROQ_API_KEY)
 
 def base_chain():
     prompt = ChatPromptTemplate.from_template(
-        """
-        Responda à pergunta do usuário baseada exclusivamente no contexto fornecido. De forma sucinta em até 10 palavras.
-        Caso os documentos retornados não tenham relação com a questão "{question}", responda: 'IIIH RAPAZ, deu RUIM!'
-        
-        Context: {context}
-        
-        Question: {question}
-        """
+        p.REFORMED_MUSIC_INFO_EXTRACTION_PROMPT
     )
 
-    retriever = WikipediaRetriever(lang="pt")
-
     chain = (
-        {"context": retriever | format_docs, "question": RunnablePassthrough()}
+        { "music_sheet": RunnablePassthrough()}
         | prompt
         | llm
-        | StrOutputParser()
+        | JsonOutputParser()
     )
 
     return chain
@@ -52,12 +36,12 @@ def handler(event, context):
     """
     handler
     """
-    question = event.get("question")
+    music_sheet = event.get("music_sheet")
 
-    if not question:
+    if not music_sheet:
         return json.dumps({"statusCode": 400, "message": "Missing question parameter"})
 
     chain = base_chain()
-    response = chain.invoke(question)
+    response = chain.invoke(music_sheet)
 
-    return json.dumps({"statusCode": 200, "response": response})
+    return {"statusCode": 200, "response": response}
