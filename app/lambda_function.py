@@ -40,7 +40,7 @@ def handler(event, context):
     music_sheet = event.get('music_sheet')
     cifraclub_url = event.get('cifraclub_url')
 
-    if not any(music_sheet, cifraclub_url):
+    if not any((music_sheet, cifraclub_url)):
         return json.dumps(
             {
                 'statusCode': 400,
