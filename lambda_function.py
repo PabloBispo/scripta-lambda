@@ -72,7 +72,7 @@ def handler(event, context):
 
 if __name__ == '__main__':
     event = {
-  "cifraclub_url": "https://www.cifraclub.com.br/isaias-saad/bondade-de-deus/"
-}
+        'cifraclub_url': 'https://www.cifraclub.com.br/isaias-saad/bondade-de-deus/'
+    }
     response = handler(event, None)
     print(response)

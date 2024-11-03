@@ -4,6 +4,18 @@ import requests
 from bs4 import BeautifulSoup
 
 
+def get_music_details(soup):
+    track_metadata = {}
+    track_metadata['name'] = soup.find('h1', class_='t1').text
+    track_metadata['artist'] = soup.find('h2', class_='t3').text
+    print(track_metadata)
+    # img_youtube = soup.find('div', class_='player-placeholder').img['src']
+    # cod = img_youtube.split('/vi/')[1].split('/')[0]
+    # track_metadata['youtube_url'] = f"https://www.youtube.com/watch?v={cod}"
+
+    return track_metadata
+
+
 def is_chord(string):
     # Regex para detectar acordes com diferentes tipos e notas de baixo, incluindo "7M"
     pattern = r'^(?:[A-G](?:#|b)?)(?:m|maj|min|sus|dim|aug|add|7M)?\d*(?:#|b)?\d*(?:\/[A-G](?:#|b)?)?$'
@@ -30,16 +42,19 @@ def remove_tabs(raw: str):
     return re.sub(r'^[EADGBE]\|[^\n]*\n?', '', raw, flags=re.MULTILINE)
 
 
-def get_raw(url: str):
+def get_raw(url: str, get_metadata: bool = False):
     response = requests.get(url)
     html_content = response.text
 
     soup = BeautifulSoup(html_content, 'html.parser')
 
+    track_metadata = get_music_details(soup)
+
     pre_section = soup.find('pre')
 
     output = pre_section.text
-
+    if get_metadata:
+        return output, track_metadata
     return output
 
 
@@ -87,7 +102,8 @@ def chords_(raw: str = None, url: str = None):
 
 
 def raw_(url: str):
-    return {'raw': get_raw(url)}
+    raw, metadata = get_raw(url, get_metadata=True)
+    return {'raw': raw, 'metadata': metadata}
 
 
 def lyrics_(raw: str = None, url: str = None):
