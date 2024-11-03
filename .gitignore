@@ -7,3 +7,6 @@ terraform.tfstate*
 
 
 venv/
+
+__pycache__/
+**/__pycache__/

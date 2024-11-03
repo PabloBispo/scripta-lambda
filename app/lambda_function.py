@@ -8,13 +8,14 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
 
 import app.prompts as p
+from app.cifraclub import chords, lyrics, raw
 
 load_dotenv()
 
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
 
 
-llm = ChatGroq(model="llama-3.1-70b-versatile", api_key=GROQ_API_KEY)
+llm = ChatGroq(model='llama-3.1-70b-versatile', api_key=GROQ_API_KEY)
 
 
 def base_chain():
@@ -23,7 +24,7 @@ def base_chain():
     )
 
     chain = (
-        { "music_sheet": RunnablePassthrough()}
+        {'music_sheet': RunnablePassthrough()}
         | prompt
         | llm
         | JsonOutputParser()
@@ -36,12 +37,33 @@ def handler(event, context):
     """
     handler
     """
-    music_sheet = event.get("music_sheet")
+    music_sheet = event.get('music_sheet')
+    cifraclub_url = event.get('cifraclub_url')
 
-    if not music_sheet:
-        return json.dumps({"statusCode": 400, "message": "Missing question parameter"})
+    if not any(music_sheet, cifraclub_url):
+        return json.dumps(
+            {
+                'statusCode': 400,
+                'message': 'Missing ("music_sheet", "cifraclub_url") params',
+            }
+        )
 
-    chain = base_chain()
-    response = chain.invoke(music_sheet)
+    if music_sheet:
+        chain = base_chain()
+        response = chain.invoke(music_sheet)
 
-    return {"statusCode": 200, "response": response}
+        return {'statusCode': 200, 'music_analysis': response}
+
+    if cifraclub_url:
+        music_raw_sheet = raw(cifraclub_url)
+        music_chords = chords(raw=music_raw_sheet)
+        music_lyrics = lyrics(raw=music_raw_sheet)
+
+        return {
+            'statusCode': 200,
+            'music_sheets': {
+                **music_raw_sheet,
+                **music_chords,
+                **music_lyrics,
+            },
+        }
