@@ -1,3 +1,4 @@
+import json
 import logging
 from typing import Dict
 
@@ -67,10 +68,10 @@ def handler(event: dict | None = None, context=None) -> dict:
     if context is None:
         context = {}
 
-    log.info('event', extra=event)
+    log.info('event', extra={'event': event})
 
     try:
-        music_info_event = MusicInfoExtractEvent.model_validate(event)
+        music_info_event = MusicInfoExtractEvent.model_validate_json(event)
 
         log.info('music_info_event', extra={'music_info_event': music_info_event})
         # context_data = Context.model_validate(context)
@@ -107,5 +108,5 @@ if __name__ == '__main__':
         'cifra_club_url': 'https://www.cifraclub.com.br/isaias-saad/bondade-de-deus/',
         'download_and_analyse_song': True,
     }
-    response = handler(event_, None)
+    response = handler(json.dumps(event_), None)
     print(response)
