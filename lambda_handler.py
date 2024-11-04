@@ -71,11 +71,15 @@ def handler(event: dict | None = None, context=None) -> dict:
 
     try:
         music_info_event = MusicInfoExtractEvent.model_validate(event)
+
+        log.info('music_info_event', extra={'music_info_event': music_info_event})
         # context_data = Context.model_validate(context)
     except ValidationError as e:
         return {'result': 'error', 'message': e.errors(include_url=False)}
 
     song_raw_sheet = get_music_sheet(music_info_event)
+
+    log.info('song_raw_sheet', extra={'song_raw_sheet': song_raw_sheet})
     if (
         not music_info_event.song_raw_sheet
         and music_info_event.download_and_analyse_song
@@ -83,6 +87,9 @@ def handler(event: dict | None = None, context=None) -> dict:
         music_info_event.song_raw_sheet = song_raw_sheet
 
     song_analysis = get_music_analysis(music_info_event)
+
+    log.info('song_analysis', extra={'song_analysis': song_analysis})
+
 
     return {
         'result': 'success',
