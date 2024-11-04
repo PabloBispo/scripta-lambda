@@ -4,7 +4,7 @@ from logging.handlers import RotatingFileHandler
 import sys
 import os
 
-def get_advanced_logger(name, log_file: str='logs.txt', level=logging.INFO):
+def get_advanced_logger(name, log_file: str | None=None, level=logging.INFO):
     # Create a logger
     logger = logging.getLogger(name)
     logger.setLevel(level)
