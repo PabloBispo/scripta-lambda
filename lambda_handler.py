@@ -71,7 +71,7 @@ def handler(event: dict | None = None, context=None) -> dict:
 
     try:
         music_info_event = MusicInfoExtractEvent.model_validate(event)
-        context_data = Context.model_validate(context)
+        # context_data = Context.model_validate(context)
     except ValidationError as e:
         return {'result': 'error', 'message': e.errors(include_url=False)}
 
@@ -87,7 +87,7 @@ def handler(event: dict | None = None, context=None) -> dict:
     return {
         'result': 'success',
         'event': music_info_event.model_dump(mode='json'),
-        'request_id': context_data.aws_request_id,
+        # 'request_id': context_data.aws_request_id,
         'data': {
             'song_analysis': song_analysis,
             'song_raw_sheet': song_raw_sheet,
