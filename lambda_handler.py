@@ -68,7 +68,6 @@ def handler(event: dict | None = None, context=None) -> dict:
         context = {}
 
     log.info('event', extra=event)
-    log.info('context', extra=context)
 
     try:
         music_info_event = MusicInfoExtractEvent.model_validate(event)
