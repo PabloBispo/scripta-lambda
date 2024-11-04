@@ -10,9 +10,9 @@ class MusicInfoExtractEvent(BaseModel):
     @root_validator
     def any_of(cls, v):
         if not any(v.values()):
-            raise ValueError(f'At least one field are required: "({v.values()})"')
-
-
+            raise ValueError(
+                f'At least one field are required: "({v.values()})"'
+            )
 
 
 class Context(BaseModel):

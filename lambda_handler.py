@@ -10,7 +10,7 @@ from pydantic import ValidationError
 from app.cifraclub import chords_, lyrics_, raw_
 from app.core.config import settings
 from app.core.logger import get_advanced_logger
-from app.models import MusicInfoExtractEvent, Context
+from app.models import Context, MusicInfoExtractEvent
 from app.prompts import REFORMED_MUSIC_INFO_EXTRACTION_PROMPT
 
 log = get_advanced_logger('LambdaHandlerLogger', level=logging.DEBUG)
@@ -53,13 +53,17 @@ def get_music_analysis(music_info_event: MusicInfoExtractEvent) -> Dict:
     if music_info_event.song_raw_sheet:
         chain = base_chain()
 
-        song_data_dict = {k:v for k, v in music_info_event.song_raw_sheet.items() if k in ('raw', 'metadata') }
+        song_data_dict = {
+            k: v
+            for k, v in music_info_event.song_raw_sheet.items()
+            if k in ('raw', 'metadata')
+        }
         result = chain.invoke(song_data_dict)
 
         return result
 
 
-def lambda_handler(event: dict | None = None, context=None) -> dict:
+def handler(event: dict | None = None, context=None) -> dict:
     if context is None:
         context = {}
 
@@ -95,7 +99,7 @@ def lambda_handler(event: dict | None = None, context=None) -> dict:
 if __name__ == '__main__':
     event_ = {
         'cifra_club_url': 'https://www.cifraclub.com.br/isaias-saad/bondade-de-deus/',
-        'download_and_analyse_song': True
+        'download_and_analyse_song': True,
     }
-    response = lambda_handler(event_, None)
+    response = handler(event_, None)
     print(response)

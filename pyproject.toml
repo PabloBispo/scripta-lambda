@@ -8,6 +8,7 @@ dependencies = [
     "bs4>=0.0.2",
     "json-log-formatter>=1.1",
     "langchain-community>=0.3.4",
+    "langchain-core>=0.3.15",
     "langchain-groq>=0.2.1",
     "langchain>=0.3.6",
     "logging>=0.4.9.6",

@@ -1,10 +1,12 @@
 import logging
-import json_log_formatter
-from logging.handlers import RotatingFileHandler
-import sys
 import os
+import sys
+from logging.handlers import RotatingFileHandler
 
-def get_advanced_logger(name, log_file: str | None=None, level=logging.INFO):
+import json_log_formatter
+
+
+def get_advanced_logger(name, log_file: str | None = None, level=logging.INFO):
     # Create a logger
     logger = logging.getLogger(name)
     logger.setLevel(level)
@@ -19,7 +21,9 @@ def get_advanced_logger(name, log_file: str | None=None, level=logging.INFO):
 
     # Optional file handler with rotation
     if log_file:
-        file_handler = RotatingFileHandler(log_file, maxBytes=10**6, backupCount=5)
+        file_handler = RotatingFileHandler(
+            log_file, maxBytes=10**6, backupCount=5
+        )
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
@@ -30,6 +34,7 @@ def get_advanced_logger(name, log_file: str | None=None, level=logging.INFO):
     logger = _add_contextual_logging(logger)
 
     return logger
+
 
 def _add_contextual_logging(logger):
     """
