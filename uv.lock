@@ -399,6 +399,12 @@ wheels = [
 ]
 
 [[package]]
+name = "json-log-formatter"
+version = "1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/67/34/02eee63c3871b9f3ea340f58d0675dae8d9cc95a8a961f379f5a1b325911/json_log_formatter-1.1.tar.gz", hash = "sha256:fe8fd801c58c1234df86211720921f60149105ef8d1e2a72966bb61da9bed584", size = 5858 }
+
+[[package]]
 name = "jsonpatch"
 version = "1.33"
 source = { registry = "https://pypi.org/simple" }
@@ -521,6 +527,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/28/6d/15ab5402bdca9c778
 wheels = [
     { url = "https://files.pythonhosted.org/packages/33/bf/5f94d4102c9497710dd0c7939e0a855d9c2d1008451a61651a5a2d28b472/langsmith-0.1.139-py3-none-any.whl", hash = "sha256:2a4a541bfbd0a9727255df28a60048c85bc8c4c6a276975923785c3fd82dc879", size = 302202 },
 ]
+
+[[package]]
+name = "logging"
+version = "0.4.9.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/93/4b/979db9e44be09f71e85c9c8cfc42f258adfb7d93ce01deed2788b2948919/logging-0.4.9.6.tar.gz", hash = "sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417", size = 96029 }
 
 [[package]]
 name = "marshmallow"
@@ -873,9 +885,12 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "bs4" },
+    { name = "json-log-formatter" },
     { name = "langchain" },
     { name = "langchain-community" },
     { name = "langchain-groq" },
+    { name = "logging" },
+    { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "requests" },
     { name = "wikipedia" },
@@ -884,9 +899,12 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "bs4", specifier = ">=0.0.2" },
+    { name = "json-log-formatter", specifier = ">=1.1" },
     { name = "langchain", specifier = ">=0.3.6" },
     { name = "langchain-community", specifier = ">=0.3.4" },
     { name = "langchain-groq", specifier = ">=0.2.1" },
+    { name = "logging", specifier = ">=0.4.9.6" },
+    { name = "pydantic", specifier = ">=2.9.2" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "wikipedia", specifier = ">=1.4.0" },

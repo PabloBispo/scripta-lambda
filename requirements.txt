@@ -227,6 +227,8 @@ httpx-sse==0.4.0 \
 idna==3.10 \
     --hash=sha256:12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9 \
     --hash=sha256:946d195a0d259cbba61165e88e65941f16e9b36ea6ddb97f00452bae8b1287d3
+json-log-formatter==1.1 \
+    --hash=sha256:fe8fd801c58c1234df86211720921f60149105ef8d1e2a72966bb61da9bed584
 jsonpatch==1.33 \
     --hash=sha256:9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee731d004e212e1ee5030c \
     --hash=sha256:0ae28c0cd062bbd8b8ecc26d7d164fbbea9652a1a3693f3b956c1eae5145dade
@@ -251,6 +253,8 @@ langchain-text-splitters==0.3.2 \
 langsmith==0.1.139 \
     --hash=sha256:2f9e4d32fef3ad7ef42c8506448cce3a31ad6b78bb4f3310db04ddaa1e9d744d \
     --hash=sha256:2a4a541bfbd0a9727255df28a60048c85bc8c4c6a276975923785c3fd82dc879
+logging==0.4.9.6 \
+    --hash=sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417
 marshmallow==3.23.1 \
     --hash=sha256:3a8dfda6edd8dcdbf216c0ede1d1e78d230a6dc9c5a088f58c4083b974a0d468 \
     --hash=sha256:fece2eb2c941180ea1b7fcbd4a83c51bfdd50093fdd3ad2585ee5e1df2508491

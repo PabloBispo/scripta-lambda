@@ -1,6 +1,4 @@
-from datetime import date
-
-from pydantic import BaseModel, ValidationError, computed_field
+from pydantic import BaseModel
 from pydantic.v1 import root_validator
 
 

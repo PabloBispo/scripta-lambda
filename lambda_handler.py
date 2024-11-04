@@ -1,9 +1,6 @@
-import json
 import logging
-import os
 from typing import Dict
 
-from dotenv import load_dotenv
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -15,7 +12,6 @@ from app.core.config import settings
 from app.core.logger import get_advanced_logger
 from app.models import MusicInfoExtractEvent, Context
 from app.prompts import REFORMED_MUSIC_INFO_EXTRACTION_PROMPT
-
 
 log = get_advanced_logger('LambdaHandlerLogger', level=logging.DEBUG)
 

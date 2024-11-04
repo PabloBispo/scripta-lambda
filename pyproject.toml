@@ -6,9 +6,12 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "bs4>=0.0.2",
+    "json-log-formatter>=1.1",
     "langchain-community>=0.3.4",
     "langchain-groq>=0.2.1",
     "langchain>=0.3.6",
+    "logging>=0.4.9.6",
+    "pydantic>=2.9.2",
     "python-dotenv>=1.0.1",
     "requests>=2.32.3",
     "wikipedia>=1.4.0",
