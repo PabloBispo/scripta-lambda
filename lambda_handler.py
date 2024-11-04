@@ -70,8 +70,10 @@ def handler(event: dict | None = None, context=None) -> dict:
 
     log.info('event', extra={'event': event})
 
+    log.info('body', extra={'body': event.get('body')})
+
     try:
-        music_info_event = MusicInfoExtractEvent.model_validate_json(event)
+        music_info_event = MusicInfoExtractEvent.model_validate_json(event.get('body'))
 
         log.info('music_info_event', extra={'music_info_event': music_info_event})
         # context_data = Context.model_validate(context)
