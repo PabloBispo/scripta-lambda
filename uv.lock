@@ -885,6 +885,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "bs4" },
+    { name = "httpx" },
     { name = "json-log-formatter" },
     { name = "langchain" },
     { name = "langchain-community" },
@@ -900,13 +901,14 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "bs4", specifier = ">=0.0.2" },
+    { name = "httpx", specifier = ">=0.27.2" },
     { name = "json-log-formatter", specifier = ">=1.1" },
     { name = "langchain", specifier = ">=0.3.6" },
     { name = "langchain-community", specifier = ">=0.3.4" },
     { name = "langchain-core", specifier = ">=0.3.15" },
     { name = "langchain-groq", specifier = ">=0.2.1" },
     { name = "logging", specifier = ">=0.4.9.6" },
-    { name = "pydantic", specifier = ">=2.9.2" },
+    { name = "pydantic", specifier = ">=2.8.2" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "wikipedia", specifier = ">=1.4.0" },
